@@ -1,4 +1,4 @@
-extends ../layout.pug
+extends ../layout
 
 block content
     include ../parts/header
@@ -7,25 +7,7 @@ block content
         .row.pt-35
             .col-12
                 if (dictionary)
-                    table.table.table-hover
-                        thead
-                            tr
-                                th #
-                                th Word
-                                th Translate 
-                                th Handle
-                        tbody
-                            each word,ind in dictionary
-                                tr(data-id=word.id) 
-                                    th=ind + 1
-                                    th(data-edit='edit' data-prop='word')=word.word
-                                    th(data-edit='edit' data-prop='translates')=word.translates
-                                    th 
-                                        .t-w.js-tw
-                                            .t-w__action.fas.fa-pencil-alt(data-action='edit' data-state='show' data-on='completeEdit')
-                                            .t-w__action.far.fa-check-circle(data-action='ok' data-on='edit' data-state='hidden')
-                                            .t-w__action.fas.fa-times(data-action='cancel' data-on='edit' data-state='hidden')
-                                            .t-w__action.fas.fa-trash(data-action='delete')
+                    include ../parts/table
 
 
 block append script

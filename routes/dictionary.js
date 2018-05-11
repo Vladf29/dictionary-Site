@@ -11,15 +11,8 @@ router.route('/new_word')
             const user = await User.findById(req.user.id);
             const dictionary = user.dictionary;
 
-            const arr = [];
-
-            for (let i = dictionary.length - 1; i != dictionary.length - 4; i--) {
-                if (!dictionary[i]) break;
-                arr.push(dictionary[i]);
-            }
-
             res.render('pages/new_word', {
-                arr
+                a: dictionary.reverse().slice(0, 3)
             });
         } catch (err) {
 
