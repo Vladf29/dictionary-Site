@@ -10,12 +10,17 @@ const morgan = require('morgan');
 
 const app = express();
 
+const port = process.env.PORT || 3000;
+
 mongoose.connect('mongodb://localhost/dictionary');
 
 app.set('view engine', 'pug');
 
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}))
 app.use(cookieParser());
 app.use(session({
     resave: false,
@@ -32,10 +37,12 @@ app.use((req, res, next) => {
 
 require('./config/passport');
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static('public'));
 
-// app.use('/', require('./routes/dictionary'));
+app.use('/', require('./routes/index'));
+app.use('/dictionary',require('./routes/dictionary'));
 app.use('/users', require('./routes/users'));
 
-app.listen(3000, () => console.log('Listening on port 3000'));
+app.listen(port, () => console.log(`Listening on port ${port}`));

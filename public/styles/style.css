@@ -3,10 +3,49 @@ body {
     min-height: 100vh;
 }
 
-.container{
+*[data-state=hidden] {
+    display: none !important;
+}
+
+.container {
     min-height: 100vh;
 }
 
 .full-height {
     min-height: 100vh;
+}
+
+.pt-70 {
+    padding-top: 70px;
+}
+
+.pt-35 {
+    padding-top: 35px;
+}
+
+.table .t-w__action {
+    visibility: hidden;
+}
+
+.table tr:hover .t-w__action {
+    visibility: visible;
+}
+
+.t-w {
+    display: flex;
+}
+
+.t-w__action {
+    margin-right: 12px;
+    cursor: pointer;
+    padding: 3px;
+    opacity: .5;
+}
+
+.t-w__action:hover {
+    opacity: 1;
+}
+
+.t-w__action:last-child {
+    margin-right: 0;
 }

@@ -1,0 +1,11 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+        .collapse.navbar-collapse.justify-content-between#navbarNavAltMarkup    
+            .navbar-nav
+                -var items = ['Home','Game','Add new word','My profile']
+                -var links = ['/','dictionary/game','dictionary/new_word','profile']
+                each item,ind in items
+                    a.nav-item.nav-link(href=`${links[ind]}`)=item
+
+            a.btn.btn-primary(href='/users/logout') Log out

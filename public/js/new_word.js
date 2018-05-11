@@ -3,21 +3,17 @@
 $('form').submit(function (event) {
     event.preventDefault();
     const data = {
-        email: $(this).find('[name=email]').val(),
-        name: $(this).find('[name=name]').val(),
-        password: $(this).find('[name=password]').val(),
+        word: $(this).find('[name=new_word]').val().toLowerCase(),
+        translates: $(this).find('[name=new_word_tr]').val()
     }
 
     $.ajax({
         method: 'POST',
-        url: '/users/signup',
+        url: '/dictionary/new_word',
         data: JSON.stringify(data),
         contentType: 'application/json',
         success: function () {
-            location.href = '/users/login';
-        },
-        error: function () {
             location.href = location.href;
         }
-    });
+    })
 });

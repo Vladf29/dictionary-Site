@@ -14,7 +14,19 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         require: true
-    }
+    },
+    dictionary: [{
+        word: {
+            type: String,
+            require: true,
+            lowercase: true,
+        },
+        translates: {
+            type: String,
+            require: true,
+            lowercase:true
+        }
+    }]
 });
 
 const User = mongoose.model('user', userSchema);

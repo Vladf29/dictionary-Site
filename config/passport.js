@@ -7,20 +7,22 @@ const Userdb = require('../db/user');
 
 const localStrategy = new LocalStrategy({
         usernameField: 'email',
-        passReqToCallback: true
+        passwordField: 'password'
     },
-    async (req, email, password, done) => {
+    async (email, password, done) => {
         try {
             const user = await Userdb.findOne({
                 email
             });
             if (!user) {
-                req.flash('error', 'Email or password is incorrect');
-                return done(null, false);
+                return done(null, false, {
+                    message: 'Email or password is incorrect'
+                });
             }
             if (password != user.password) {
-                req.flash('error', 'Email or password is incorrect');
-                return done(null, false);
+                return done(null, false, {
+                    message: 'Email or password is incorrect'
+                });
             }
 
             return done(null, user);
@@ -29,4 +31,14 @@ const localStrategy = new LocalStrategy({
         }
     });
 
-passport.use(localStrategy);
+passport.use('local', localStrategy);
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+    Userdb.findById(id, function (err, user) {
+        done(err, user);
+    });
+});

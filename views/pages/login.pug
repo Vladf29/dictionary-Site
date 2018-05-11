@@ -3,19 +3,14 @@ extends ../layout
 block content
     .container
         .row.full-height.flex-column.align-items-center.justify-content-center
-            .col-md-4.text-center
-                h1 Log-in
-            .col-md-4
-                form
+            .col-10.col-md-6.col-lg-5.text-center
+                h1 Log in
+            .col-10.col-md-6.col-lg-5
+                form(action="/users/login" method='POST')
                     .form-group
-                        input.form-control(type='text' placeholder='Enter your name' name='name' required)
+                        input.form-control(type='email' placeholder='Enter your email' name='email' value='warvlad822@gmail.com' required)
                     .form-group
-                        input.form-control(type='email' placeholder='Enter your email' name='email' required)
-                    .form-group
-                        input.form-control(type='password' placeholder='Enter your password' name='password' minlength='6' required)
-                    .form-group
-                        button.btn.btn-primary Sign up
-
-block append script
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
-    script(src="/js/signup.js")
+                        input.form-control(type='password' placeholder='Enter your password' name='password' value='12345678' minlength='6' required)
+                    .form-group.d-flex.align-items-center.justify-content-between
+                        button.btn.btn-primary Log in
+                        a(href='/users/signup') Sign up
