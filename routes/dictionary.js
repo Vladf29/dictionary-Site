@@ -71,8 +71,19 @@ router.delete('/delete', async (req, res) => {
     }
 });
 
-router.get('/game', async (req, res) => {
-    res.render('pages/game');
-});
+router.route('/game')
+    .get(async (req, res) => {
+        res.render('pages/game');
+    });
+
+router.get('/game/words', async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        const words = await user.dictionary;
+        res.json(words);
+    } catch (err) {
+        err;
+    }
+})
 
 module.exports = router;

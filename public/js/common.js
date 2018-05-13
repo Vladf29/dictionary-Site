@@ -10,7 +10,7 @@ $(function () {
             case 'edit':
                 {
                     const parent = $(target).closest('tr');
-                    const edit = parent.find('th[data-edit]');
+                    const edit = parent.find('td[data-edit]');
                     if (!edit) return;
 
                     edit.each(function () {
@@ -30,7 +30,7 @@ $(function () {
             case 'ok':
                 {
                     const parent = $(target).closest('tr');
-                    const edit = parent.find('th[data-edit]');
+                    const edit = parent.find('td[data-edit]');
                     if (!edit) return;
 
                     const data = {};
@@ -62,7 +62,7 @@ $(function () {
             case 'cancel':
                 {
                     const parent = $(target).closest('tr');
-                    const edit = parent.find('th[data-edit]');
+                    const edit = parent.find('td[data-edit]');
                     if (!edit) return;
 
 

@@ -4,7 +4,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
         .collapse.navbar-collapse.justify-content-between#navbarNavAltMarkup    
             .navbar-nav
                 -var items = ['Home','Game','Add new word','My profile']
-                -var links = ['/','dictionary/game','dictionary/new_word','profile']
+                -var links = ['/','/dictionary/game','/dictionary/new_word','/profile']
                 each item,ind in items
                     a.nav-item.nav-link(href=`${links[ind]}`)=item
 

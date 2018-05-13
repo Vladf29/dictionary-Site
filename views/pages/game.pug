@@ -1,4 +1,32 @@
 extends ../layout
 
 block content
-    h1 hello world
+    include ../parts/header
+    .container.pt-70
+        h2.text-center Game
+        .row.justify-content-center.pt-35
+            .col-10.col-md-6.col-lg-5.js-game-block(data-state='hidden')
+                form(action="")
+                    .form-group.d-flex.flex-column
+                        label.text-center.ques-word#ques_word(for="answer_user") Something went wrong
+                        input.form-control(type='text' placeholder='Enter a answer' name='answer_user' id='answer_user' required)
+                    .form-group.d-flex.justify-content-end
+                        .btn-group.js-btns-actions
+                            button.btn.btn-primary(data-action='answer') Answer
+                            button.btn.btn-secondary(data-action='skip') Skip
+                            button.btn.btn-info(data-action='tip') Tip
+                            button.btn(data-action='finish') Finish
+            .col-10.col-md-6.col-lg-5.d-flex.justify-content-center.js-start-block(data-state='show')
+                button.btn.btn-warning.js-start Start
+            
+            table.table.table-hover.js-table(data-state='hidden')
+                thead
+                    tr
+                        th #
+                        th Word
+                        th Translate 
+                        th Answer
+                tbody.js-table-tbody
+
+block append script
+    script(src="/js/game.js")
