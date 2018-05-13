@@ -1,5 +1,7 @@
 'use strict'
 
+$('form').find('[name=new_word]').focus();
+
 $('form').submit(function (event) {
     event.preventDefault();
     const data = {

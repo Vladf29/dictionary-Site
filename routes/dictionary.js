@@ -4,9 +4,10 @@ const router = require('express').Router();
 const authorized = require('../modules/authorized');
 const User = require('../db/user');
 
+router.use(authorized.isAuthorized)
 
 router.route('/new_word')
-    .get(authorized.isAuthorized, async (req, res) => {
+    .get(async (req, res) => {
         try {
             const user = await User.findById(req.user.id);
             const dictionary = user.dictionary;
@@ -17,7 +18,7 @@ router.route('/new_word')
         } catch (err) {
 
         }
-    }).post(authorized.isAuthorized, async (req, res) => {
+    }).post(async (req, res) => {
         try {
             const user = await User.findById(req.user.id);
             if (user.dictionary.length !== 0) {
@@ -39,7 +40,7 @@ router.route('/new_word')
         }
     });
 
-router.put('/edit', authorized.isAuthorized, async (req, res) => {
+router.put('/edit', async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
 
@@ -56,7 +57,7 @@ router.put('/edit', authorized.isAuthorized, async (req, res) => {
     }
 })
 
-router.delete('/delete', authorized.isAuthorized, async (req, res) => {
+router.delete('/delete', async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         await user.dictionary.pull(req.body.id);
@@ -68,6 +69,10 @@ router.delete('/delete', authorized.isAuthorized, async (req, res) => {
         req.flash('error', 'Something went wrong!');
         res.send();
     }
+});
+
+router.get('/game', async (req, res) => {
+    res.render('pages/game');
 });
 
 module.exports = router;

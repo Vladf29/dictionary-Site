@@ -42,7 +42,7 @@ app.use(passport.session());
 app.use(express.static('public'));
 
 app.use('/', require('./routes/index'));
-app.use('/dictionary',require('./routes/dictionary'));
+app.use('/dictionary', require('./routes/dictionary'));
 app.use('/users', require('./routes/users'));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
