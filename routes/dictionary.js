@@ -76,10 +76,26 @@ router.route('/game')
         res.render('pages/game');
     });
 
+router.post('/ingame', async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        const word = await user.dictionary.id(req.body.idWord);
+        word.ingame = req.body.ingame;
+        await user.save();
+
+        res.json({
+            status: 'OK',
+            ingame: req.body.ingame
+        });
+    } catch (err) {
+        err;
+    }
+})
+
 router.get('/game/words', async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
-        const words = await user.dictionary;
+        const words = await user.dictionary.filter((w) => w.ingame === true);
         res.json(words);
     } catch (err) {
         err;

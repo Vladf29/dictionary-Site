@@ -3,14 +3,20 @@ table.table.table-hover
         tr
             th #
             th Word
-            th Translate 
+            th Translate
+            th Game 
             th Handle
     tbody
         each word,ind in dictionary
-            tr(data-id=word.id) 
+            tr(data-word-id=word.id data-ingame=`${word.ingame}`)
                 th=ind + 1
                 td(data-edit='edit' data-prop='word')=word.word
                 td(data-edit='edit' data-prop='translates')=word.translates
+                td 
+                    if word.ingame
+                        input.js-checkbox-dictionary(type="checkbox" checked=`${word.ingame}`)
+                    else 
+                        input.js-checkbox-dictionary(type="checkbox")                        
                 td 
                     .t-w.js-tw
                         .t-w__action.fas.fa-pencil-alt(data-action='edit' data-state='show' data-on='completeEdit')

@@ -24,8 +24,12 @@ const userSchema = mongoose.Schema({
         translates: {
             type: String,
             require: true,
-            lowercase:true
-        }
+            lowercase: true
+        },
+        ingame: {
+            type: Boolean,
+            default: true
+        },
     }]
 });
 

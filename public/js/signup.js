@@ -17,7 +17,7 @@ $('form').submit(function (event) {
             location.href = '/users/login';
         },
         error: function () {
-            location.href = location.href;
+            location.reload();
         }
     });
 });

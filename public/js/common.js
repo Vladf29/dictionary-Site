@@ -1,6 +1,7 @@
 'use strict'
 
 $(function () {
+
     $('.js-tw').click(function (event) {
         const target = event.target;
         const action = $(target).attr('data-action');
@@ -49,7 +50,7 @@ $(function () {
                         method: 'PUT',
                         url: '/dictionary/edit',
                         data: JSON.stringify({
-                            id: parent.attr('data-id'),
+                            id: parent.attr('data-word-id'),
                             data: data
                         }),
                         contentType: 'application/json',
@@ -85,7 +86,7 @@ $(function () {
                         method: 'DELETE',
                         url: '/dictionary/delete',
                         data: JSON.stringify({
-                            id: parent.attr('data-id')
+                            id: parent.attr('data-word-id')
                         }),
                         contentType: 'application/json',
                         complete: function () {
@@ -97,5 +98,27 @@ $(function () {
             default:
                 break;
         }
+    });
+
+    $('.js-checkbox-dictionary').click(function (event) {
+        const tr = $(this).closest('tr');
+        const idWord = tr.attr('data-word-id');
+        const ingame = tr.attr('data-ingame');
+        $.ajax({
+            method: 'POST',
+            url: '/dictionary/ingame',
+            data: JSON.stringify({
+                idWord,
+                ingame: ingame === 'true' ? false : true
+            }),
+            contentType: 'application/json',
+            success: function (data) {
+                if (data.status === 'OK')
+                    tr.attr('data-ingame', data.ingame);
+            },
+            error: function (err) {
+
+            }
+        });
     });
 });
